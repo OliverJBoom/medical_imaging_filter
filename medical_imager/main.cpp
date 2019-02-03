@@ -11,31 +11,17 @@ using namespace std;
 int main() {
 	//hello_world();
 	//cimg::imagemagick_path("C:\\Program Files\\ImageMagick-7.0.8-Q16\\magick.exe");
+
 	CImg<unsigned char> src("logo.bmp");
-	/*
-	int width = src.width();
-	int height = src.height();
-	unsigned char* ptr = src.data(10, 10);
-	unsigned char r = ptr[0];
-	unsigned char g = ptr[0 + width * height];
-	unsigned char b = ptr[0 + 2 * width*height];
+	//src.display();
 
-	//img.display();
-	//unsigned char r = ptr[0];
-	//unsigned char r = img(0, 0, 0, 0);
-	*/
-	cimg_forXYC(src, x, y, c) {  // Do 3 nested loops
-		//cout << "c: " << c;
-		int width = src.width();
-		int height = src.height();
-		//unsigned char* ptr = src.data(x, y, c);
-
-		unsigned char r = src(x, y, 0, c);
-		//unsigned char r = ptr[0];
-		//unsigned char g = ptr[0 + width * height];
-		//unsigned char b = ptr[0 + 2 * width*height];
-		cout << r << r;
+	cimg_forXYC(src, x, y, c) {  // Does 3 nested loops
+		// c = 0, 1, 2 for R G B respectively
+		int val = (int)src(x, y, 0, c);
+		cout << "(" << x << "," << y << "," << c << ") = "
+		 << val << endl;
 	}
+
 	// pokemon.bmp		parrot_mask.pgm
 	
 
