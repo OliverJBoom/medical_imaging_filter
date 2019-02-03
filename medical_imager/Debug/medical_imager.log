@@ -1,2 +1,3 @@
 ﻿  main.cpp
+c:\users\acse5-user\source\repos\medical_imager\medical_imager\main.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   medical_imager.vcxproj -> C:\Users\acse5-user\source\repos\medical_imager\Debug\medical_imager.exe
