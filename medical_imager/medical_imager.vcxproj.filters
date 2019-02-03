@@ -26,5 +26,27 @@
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CImg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="chest.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="chestb.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pokemon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="logo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="parrot_mask.pgm">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

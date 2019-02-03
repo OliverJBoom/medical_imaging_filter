@@ -119,7 +119,17 @@
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CImg.h" />
     <ClInclude Include="utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="chest.jpg" />
+    <Image Include="chestb.bmp" />
+    <Image Include="logo.bmp" />
+    <Image Include="pokemon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="parrot_mask.pgm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
