@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Convolution.h"
+#include "Filter.h"
 #include "CImg.h"
 
 
@@ -118,7 +119,7 @@ void Kernel::set_norm(int value) {
 
 
 //Performs convolution on an image using an input kernel
-CImg<unsigned char> Kernel::conv(CImg<unsigned char> src, int width, int height, int depth) {
+CImg<unsigned char> Kernel::conv(CImg<unsigned char> src) {
 	int padding = (kernel_dim - 1) / 2;
 
 	CImg<unsigned char> im_out(width - (2 * padding), height - (2 * padding), depth, 1);

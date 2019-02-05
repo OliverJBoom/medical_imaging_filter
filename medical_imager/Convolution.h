@@ -6,6 +6,7 @@
 #include <string>
 
 #include "Convolution.h"
+#include "Filter.h"
 #include "CImg.h"
 #include "Utils.h"
 
@@ -15,8 +16,7 @@ using namespace std;
 
 
 
-class Kernel
-{
+class Kernel: public Filter{
 	public: 
 
 		// Class attributes
@@ -30,7 +30,7 @@ class Kernel
 		void print();
 		void set_norm(int value);
 
-		CImg<unsigned char> conv(CImg<unsigned char> src, int width, int height, int depth);
+		CImg<unsigned char> conv(CImg<unsigned char> src);
 
 	private:
 

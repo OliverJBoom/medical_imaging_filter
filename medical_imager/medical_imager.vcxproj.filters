@@ -18,15 +18,27 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="convolution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils.h">
+    <ClInclude Include="CImg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CImg.h">
+    <ClInclude Include="Convolution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,6 +53,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="logo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\dunc.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
