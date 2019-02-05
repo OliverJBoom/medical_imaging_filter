@@ -11,12 +11,12 @@
   http://cimg.eu/reference/group__cimg__tutorial.html
   https://stackoverflow.com/questions/46055720/cannot-load-any-image-with-cimg/46058914#46058914
 
-## Stage 2 - Convolution
-- 
 
-## Stage 3 - Writing back to JPEG
+# To Do:
 
-
-# Extensions
-
-- look at DICOM
+Add in imagemagick to access DICOM, jpg, png
+Write to file
+User interface
+Report
+Documentation
+Look at spec and tick of requirements. Polymorphism
