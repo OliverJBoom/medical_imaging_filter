@@ -21,6 +21,7 @@ class Kernel
 
 		// Class attributes
 		vector<vector<int>> kernel_array;
+		int kernel_dim;
 		int norm;
 
 		// Class Methods
