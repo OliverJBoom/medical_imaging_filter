@@ -81,3 +81,61 @@ CImg<unsigned char> Filter::brighten(CImg<unsigned char> src, int level) {
 	}
 	return bright;
 }
+
+
+
+// Brightens the image by an input value. 
+CImg<unsigned char> Filter::high_pass(CImg<unsigned char> src, int level) {
+
+	CImg<unsigned char> pass(width, height, depth, 1);
+
+	cimg_forXY(src, x, y) {
+		int val = (int)src(x, y);
+
+		if (val < level) {
+			pass(x, y) = val;
+		}
+		else {
+			pass(x, y) = 0;
+		}
+	}
+	return pass;
+}
+
+
+
+CImg<unsigned char> Filter::low_pass(CImg<unsigned char> src, int level) {
+
+	CImg<unsigned char> pass(width, height, depth, 1);
+
+	cimg_forXY(src, x, y) {
+		int val = (int)src(x, y);
+
+		if (val > level) {
+			pass(x, y) = val;
+		}
+		else {
+			pass(x, y) = 0;
+		}
+	}
+	return pass;
+}
+
+
+
+CImg<unsigned char> Filter::band_pass(CImg<unsigned char> src, int low_lim, int up_lim) {
+
+	CImg<unsigned char> pass(width, height, depth, 1);
+
+	cimg_forXY(src, x, y) {
+		int val = (int)src(x, y);
+
+		if ((val > low_lim) && (val < up_lim)) {
+			pass(x, y) = val;
+		}
+		else {
+			pass(x, y) = 0;
+		}
+	}
+	return pass;
+}

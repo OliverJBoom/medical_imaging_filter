@@ -115,16 +115,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="convolution.cpp" />
+    <ClCompile Include="Filter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImg.h" />
-    <ClInclude Include="utils.h" />
+    <ClInclude Include="Convolution.h" />
+    <ClInclude Include="Filter.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="chest.jpg" />
     <Image Include="chestb.bmp" />
+    <Image Include="Images\dunc.bmp" />
     <Image Include="logo.bmp" />
     <Image Include="pokemon.bmp" />
   </ItemGroup>

@@ -1,3 +1,15 @@
-﻿  main.cpp
-c:\users\acse5-user\source\repos\medical_imager\medical_imager\main.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+﻿  Filter.cpp
+c:\users\acse5-user\source\repos\medical_imager\medical_imager\filter.cpp(23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  convolution.cpp
+c:\users\acse5-user\source\repos\medical_imager\medical_imager\convolution.cpp(81): warning C4018: '<': signed/unsigned mismatch
+c:\users\acse5-user\source\repos\medical_imager\medical_imager\convolution.cpp(83): warning C4018: '<': signed/unsigned mismatch
+c:\users\acse5-user\source\repos\medical_imager\medical_imager\convolution.cpp(134): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=unsigned char
+          ]
+  main.cpp
+  utils.cpp
+  Generating Code...
+  LINK : C:\Users\acse5-user\source\repos\medical_imager\Debug\medical_imager.exe not found or not built by the last incremental link; performing full link
   medical_imager.vcxproj -> C:\Users\acse5-user\source\repos\medical_imager\Debug\medical_imager.exe
