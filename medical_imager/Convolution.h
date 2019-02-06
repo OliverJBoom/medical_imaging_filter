@@ -12,7 +12,6 @@
 
 
 using namespace cimg_library;
-using namespace std;
 
 
 
@@ -20,7 +19,7 @@ class Kernel: public Filter{
 	public: 
 
 		// Class attributes
-		vector<vector<int>> kernel_array;
+		std::vector<std::vector<int>> kernel_array;
 		int kernel_dim;
 		int norm;
 
@@ -34,7 +33,7 @@ class Kernel: public Filter{
 
 	private:
 
-		vector<int> conv_vec;
+		std::vector<int> conv_vec;
 };
 
 

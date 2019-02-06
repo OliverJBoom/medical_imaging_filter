@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,12 +119,14 @@
     <ClCompile Include="convolution.cpp" />
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImg.h" />
     <ClInclude Include="Convolution.h" />
     <ClInclude Include="Filter.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

@@ -9,9 +9,7 @@
 #include "CImg.h"
 
 
-using namespace std;
 using namespace cimg_library;
-
 
 
 //Sets the kernel vector based on a desired image filter effect
@@ -20,7 +18,7 @@ void Kernel::vector_select(char effect) {
 	conv_vec.clear();
 
 	if (effect == 'B') {
-		vector<int> vec = { 1, 1, 1 , 1, 1, 1, 1, 1, 1 }; // Blur
+		std::vector<int> vec = { 1, 1, 1 , 1, 1, 1, 1, 1, 1 }; // Blur
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -29,7 +27,7 @@ void Kernel::vector_select(char effect) {
 	}
 
 	else if (effect == 'S') {
-		vector<int> vec = { 0, -1, 0, -1, 5, -1, 0, -1, 0 }; // Sharpen
+		std::vector<int> vec = { 0, -1, 0, -1, 5, -1, 0, -1, 0 }; // Sharpen
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -38,7 +36,7 @@ void Kernel::vector_select(char effect) {
 	}
 
 	else if (effect == 'E') {
-		vector<int> vec = { 0, 1, 0, 1, -4, 1, 0, 1, 0 }; // Edge Detection
+		std::vector<int> vec = { 0, 1, 0, 1, -4, 1, 0, 1, 0 }; // Edge Detection
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -47,7 +45,7 @@ void Kernel::vector_select(char effect) {
 	}
 
 	else if (effect == 'P') {
-		vector<int> vec =
+		std::vector<int> vec =
 				 {5, 10, 20, 10, 5, 
 				 10, 100, 200, 200, 10,
 				 20, 200, -1500, 200, 20, 
@@ -62,7 +60,7 @@ void Kernel::vector_select(char effect) {
 	}
 
 	else {
-		vector<int> vec = { 0, 0, 0 , 0, 1, 0, 0, 0, 0 }; // Same
+		std::vector<int> vec = { 0, 0, 0 , 0, 1, 0, 0, 0, 0 }; // Same
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -76,7 +74,7 @@ void Kernel::vector_select(char effect) {
 //Loads the desired vector kernel into the kernel
 void Kernel::place(){
 
-	vector <int> row;
+	std::vector <int> row;
 	int i = 0;
 	int j = 1;
 
@@ -97,16 +95,16 @@ void Kernel::place(){
 
 //Prints the kernel and normalisation factor
 void Kernel::print() {
-	cout << endl << endl << "Kernel:" << endl;
+	std::cout << std::endl << std::endl << "Kernel:" << std::endl;
 	for (int j = 0; j < kernel_array.size(); j++)
 	{
 		for (int i = 0; i < kernel_array.size(); i++)
 		{
-			cout << kernel_array[j][i] << "  ";
+			std::cout << kernel_array[j][i] << "  ";
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
-	cout << "Norm: " << norm;
+	std::cout << "Norm: " << norm;
 }
 
 

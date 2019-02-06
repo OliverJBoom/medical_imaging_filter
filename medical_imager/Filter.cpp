@@ -8,7 +8,6 @@
 
 
 using namespace cimg_library;
-using namespace std;
 
 
 

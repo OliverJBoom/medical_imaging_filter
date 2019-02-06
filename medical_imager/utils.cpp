@@ -5,17 +5,15 @@
 #include "Utils.h"
 
 
-using namespace std;
-
 
 void hello_world() {
-	cout << "Hello World!" << endl;
+	std::cout << "Hello World!" << std::endl;
 	system("pause");
 }
 
 
-void vector_print(vector <int> vec)
+void vector_print(std::vector <int> vec)
 {
 	for (auto &i : vec)
-		cout << i << endl;
+		std::cout << i << std::endl;
 }

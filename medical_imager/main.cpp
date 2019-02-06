@@ -5,19 +5,22 @@
 #include "Utils.h"
 #include "Convolution.h"
 #include "Filter.h"
+#include "UI.h"
 
 #include "CImg.h"
 
+
 using namespace cimg_library;
-using namespace std;
+
 
 
 int main() {
 	//cimg::imagemagick_path("C://Program Files//ImageMagick-7.0.8-Q16//convert.exe");
 	class Filter Fil;
-
+	welcome();
 	CImg<unsigned char> src("Images//chestb.bmp");
 
+	/*
 	Fil.set_dim(src.width(), src.height(), src.depth());
 
 	class Kernel Example;
@@ -40,7 +43,7 @@ int main() {
 	//grey.display();
 	//bri.display();
 	conv_out.display();
-	
+	*/
 	system("pause");
 	return 0;
 }
