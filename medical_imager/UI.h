@@ -4,6 +4,20 @@
 #include <iostream>
 #include <vector>
 
-void welcome();
+
+
+class user {
+
+	public:
+
+		std::string file_name;
+		char effect;
+
+		void welcome();
+		void name_input();
+		void valid_file();
+		bool in_dir = false;
+		void filter_select();
+};
 
 #endif

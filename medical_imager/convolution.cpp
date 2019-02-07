@@ -17,7 +17,7 @@ void Kernel::vector_select(char effect) {
 
 	conv_vec.clear();
 
-	if (effect == 'B') {
+	if (effect == 'j') {
 		std::vector<int> vec = { 1, 1, 1 , 1, 1, 1, 1, 1, 1 }; // Blur
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
