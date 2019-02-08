@@ -6,7 +6,7 @@
 #include "Convolution.h"
 #include "Filter.h"
 #include "UI.h"
-
+#include "display.h"
 #include "CImg.h"
 
 
@@ -21,8 +21,7 @@ int main() {
 	ui.welcome();
 	ui.name_input();
 	ui.filter_select();
-	CImg<unsigned char> src_2 (ui.file_name.c_str());
-	CImg<unsigned char> src = Fil.greyscale(src_2);
+	CImg<unsigned char> src (ui.file_name.c_str());
 
 	Fil.set_dim(src.width(), src.height(), src.depth());
 	CImg<unsigned char> out;
@@ -30,7 +29,9 @@ int main() {
 	class Kernel convolve;
 
 	out = ui.wrapper_function(src, Fil, convolve);
-	out.display();
+
+	class display Grid;
+	Grid.before_after(src, out);
 
 	std::cout << "\n\nThank you for your custom!";
 

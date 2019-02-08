@@ -95,7 +95,7 @@ void user::filter_select() {
 	std::cout << "Sharpen (High):   Code 'g' " << std::endl;
 	std::cout << "Gaussian blur :   Code 'h'" << std::endl;
 	std::cout << "Unsharp masking:  Code 'i'" << std::endl;
-	std::cout << "Blur (Low):       Code 'j'" << std::endl;
+	std::cout << "Blue (Low):       Code 'j'" << std::endl;
 	std::cout << "Blue (High):      Code 'k'" << std::endl;
 	std::cout << "Edge detection:   Code 'l'" << std::endl;
 	std::cout << "Psychadelic:      Code 'm' \t" << std::endl;
@@ -115,25 +115,34 @@ CImg<unsigned char> user::wrapper_function(CImg<unsigned char> src, Filter Fil, 
 	CImg<unsigned char> out;
 	int level;
 
-	if (effect == 'a') {				 //Greyccale
+	if (effect == 'a') {				 //Greyscale
+		std::cout << "/nEffect: Greyscale";
 		out = Fil.greyscale(src);
 	}
 	else if (effect == 'b') {			 //Brighten
+		std::cout << "/nEffect: Brighten";
+
 		std::cout << "What level brightening would you like to input (between 0-256)\n";
 		std::cin >> level;
 		out = Fil.brighten(src, level);
 	}
 	else if (effect == 'c') {			 //Low pass filter
+		std::cout << "/nEffect: Low pass filter";
+
 		std::cout << "Below what level brightness would you like to pass (between 0-256)\n";
 		std::cin >> level;
 		out = Fil.low_pass(src, level);
 	}
 	else if (effect == 'd') {			 //High pass filter
+		std::cout << "/nEffect: High pass filter";
+
 		std::cout << "Over what level brightness would you like to pass (between 0-256)\n";
 		std::cin >> level;
 		out = Fil.high_pass(src, level);
 	}
 	else if (effect == 'e') {			 //Band pass filter
+		std::cout << "/nEffect: Band pass filter";
+
 		std::cout << "Between what level brightnesses would you like to pass (between 0-256)\n";
 		int low_lim;
 		int up_lim;
