@@ -21,9 +21,6 @@
     <ClCompile Include="convolution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Filter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Convolution.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Filter.h">

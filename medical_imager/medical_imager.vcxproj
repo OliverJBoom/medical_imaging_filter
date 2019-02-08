@@ -121,7 +121,6 @@
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI.cpp" />
-    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImg.h" />
@@ -129,7 +128,6 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="UI.h" />
-    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="chest.jpg" />

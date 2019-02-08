@@ -2,13 +2,10 @@
 #include <string>
 #include <vector>
 
-
 #include "Filter.h"
 #include "CImg.h"
 
-
 using namespace cimg_library;
-
 
 
 //Greyscales the image
@@ -16,16 +13,18 @@ CImg<unsigned char> Filter::greyscale(CImg<unsigned char> src) {
 
 	CImg<unsigned char> grey(src.width(), src.height(), src.depth(), 1);
 
+	//This function loops over the images dimensions
 	cimg_forXY(src, x, y) {
 		// Recipe for grayscale weighting from RGB : 0.2989, 0.5870, 0.1140
-		// Need to deal with the rounding errors
 		int val = 0.2989 * (int)src(x, y, 0) + 0.5870 * (int)src(x, y, 1) + 0.1140 * (int)src(x, y, 2);
 		grey(x, y, 0, 0) = val;
 	}
 	return grey;
 }
 
-// Get Red
+
+
+//Returns the red spectrum of a image
 CImg<unsigned char> Filter::getRed(CImg<unsigned char> src) {
 
 	CImg<unsigned char> Red(src.width(), src.height(), src.depth(), 3);
@@ -37,7 +36,9 @@ CImg<unsigned char> Filter::getRed(CImg<unsigned char> src) {
 	return Red;
 }
 
-// Get Green
+
+
+//Returns the green spectrum of a image
 CImg<unsigned char> Filter::getGreen(CImg<unsigned char> src) {
 
 	CImg<unsigned char> Green(src.width(), src.height(), src.depth(), 3);
@@ -49,7 +50,9 @@ CImg<unsigned char> Filter::getGreen(CImg<unsigned char> src) {
 	return Green;
 }
 
-// Get Blue
+
+
+//Returns the blue spectrum of a image
 CImg<unsigned char> Filter::getBlue(CImg<unsigned char> src) {
 
 	CImg<unsigned char> Blue(src.width(), src.height(), src.depth(), 3);
@@ -68,7 +71,7 @@ CImg<unsigned char> Filter::colour_swap(CImg<unsigned char> src) {
 
 	CImg<unsigned char> col(width, height, depth, 3);
 
-	cimg_forXYC(src, x, y, c) {  // Does 3 nested loops
+	cimg_forXYC(src, x, y, c) {  
 		// c = 0, 1, 2 for R G B respectively
 		int val = (int)src(x, y, c);
 
@@ -90,7 +93,7 @@ CImg<unsigned char> Filter::colour_swap(CImg<unsigned char> src) {
 
 
 
-// Sets the image dimensions
+//Stores the image dimensions
 void Filter::set_dim(int im_width, int im_height, int im_depth) {
 	width = im_width;
 	height = im_height;
@@ -102,7 +105,6 @@ void Filter::set_dim(int im_width, int im_height, int im_depth) {
 // Brightens the image by an input value. 
 CImg<unsigned char> Filter::brighten(CImg<unsigned char> src, int level) {
 	int channels = src.spectrum();
-	std::cout << "channels: " << channels;
 
 	CImg<unsigned char> bright(width, height, depth, channels);
 
@@ -122,10 +124,9 @@ CImg<unsigned char> Filter::brighten(CImg<unsigned char> src, int level) {
 
 
 
-// Brightens the image by an input value. 
-CImg<unsigned char> Filter::high_pass(CImg<unsigned char> src, int level) {
+//Allows values under a certain value to pass. 
+CImg<unsigned char> Filter::low_pass(CImg<unsigned char> src, int level) {
 	int channels = src.spectrum();
-	std::cout << "channels: " << channels;
 
 	CImg<unsigned char> pass(width, height, depth, channels);
 
@@ -135,18 +136,18 @@ CImg<unsigned char> Filter::high_pass(CImg<unsigned char> src, int level) {
 		if (val < level) {
 			pass(x, y, 0, c) = val;
 		}
+		//If the value is not below the input level it is set to the level
 		else {
-			pass(x, y, 0, c) = 0;
+			pass(x, y, 0, c) = level;
 		}
 	}
 	return pass;
 }
 
 
-
-CImg<unsigned char> Filter::low_pass(CImg<unsigned char> src, int level) {
+//Allows values over a certain value to pass. 
+CImg<unsigned char> Filter::high_pass(CImg<unsigned char> src, int level) {
 	int channels = src.spectrum();
-	std::cout << "channels: " << channels;
 
 	CImg<unsigned char> pass(width, height, depth, channels);
 
@@ -156,18 +157,18 @@ CImg<unsigned char> Filter::low_pass(CImg<unsigned char> src, int level) {
 		if (val > level) {
 			pass(x, y, 0, c) = val;
 		}
+		//If the value is not above the input level it is set to the level
 		else {
-			pass(x, y, 0, c) = 0;
+			pass(x, y, 0, c) = level;
 		}
 	}
 	return pass;
 }
 
 
-
+//Allows values with a certain band to pass
 CImg<unsigned char> Filter::band_pass(CImg<unsigned char> src, int low_lim, int up_lim) {
 	int channels = src.spectrum();
-	std::cout << "channels: " << channels;
 
 	CImg<unsigned char> pass(width, height, depth, channels);
 
@@ -177,8 +178,9 @@ CImg<unsigned char> Filter::band_pass(CImg<unsigned char> src, int low_lim, int 
 		if ((val > low_lim) && (val < up_lim)) {
 			pass(x, y, 0, c) = val;
 		}
+		//If the value is not within the range it is set to the lower limit
 		else {
-			pass(x, y, 0, c) = 0;
+			pass(x, y, 0, c) = low_lim;
 		}
 	}
 	return pass;

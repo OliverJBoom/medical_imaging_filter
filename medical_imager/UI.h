@@ -8,21 +8,23 @@
 #include "CImg.h"
 
 
-class user {
+
+class User {
 
 	public:
-
+		//Class attributes
 		std::string file_name;
 		char effect;
 		char decision;
-
-		CImg<unsigned char> wrapper_function(CImg<unsigned char> src, Filter Fil, Kernel convolve);
+		bool in_dir = false;
 
 		void welcome();
 		void name_input();
 		void valid_file();
-		bool in_dir = false;
 		void filter_select();
+
+		//Class methods
+		CImg<unsigned char> wrapper_function(CImg<unsigned char> src, Filter Fil, Kernel convolve);
 		CImg<unsigned char> extra_filter(CImg<unsigned char> src, CImg<unsigned char> , Filter Fil, Kernel convolve);
 };
 

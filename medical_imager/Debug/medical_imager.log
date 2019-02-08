@@ -1,2 +1,3 @@
-﻿  display.cpp
+﻿  Filter.cpp
+c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\filter.cpp(19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   medical_imager.vcxproj -> C:\Users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\Debug\medical_imager.exe

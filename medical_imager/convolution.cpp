@@ -8,8 +8,8 @@
 #include "Filter.h"
 #include "CImg.h"
 
-
 using namespace cimg_library;
+
 
 
 //Sets the kernel vector based on a desired image filter effect
@@ -17,10 +17,10 @@ void Kernel::vector_select(char effect) {
 
 	conv_vec.clear();
 
-	if (effect == 'f') {
+	if (effect == 'f') {									//Sharpen	
 		std::vector<int> vec = { 0, -1, 0, 
 					             -1, 5, -1, 
-			                     0, -1, 0 }; // Sharpen
+			                     0, -1, 0 }; 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -28,14 +28,13 @@ void Kernel::vector_select(char effect) {
 		norm = 1;
 		std::cout << "\nSharpen (Low)\n";
 	}
-
-	else if (effect == 'g') {
+	else if (effect == 'g') {								//Sharpening 5x5
 		std::vector<int> vec =
 								{ -1, -1, -1, -1, -1,
 								  -1, -1, -1, -1, -1,
 								  -1, -1, 25, -1, -1,
 							   	  -1, -1, -1, -1, -1,
-								  -1, -1, -1, -1, -1 }; // Sharpening 5x5
+								  -1, -1, -1, -1, -1 }; 
 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
@@ -45,14 +44,13 @@ void Kernel::vector_select(char effect) {
 		std::cout << "\nSharpen (High)\n";
 
 	}
-
-	else if (effect == 'h') {
+	else if (effect == 'h') {								//Gaussian Blur
 		std::vector<int> vec =
 								{ 1, 4, 6, 4, 1,
 								  4, 16, 24, 16, 4,
 							      6, 24, 36, 24, 6,
 								  4, 16, 24, 16, 4,
-								  1, 4, 6, 4, 1 }; // Gaussian Blur
+								  1, 4, 6, 4, 1 }; 
 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
@@ -62,14 +60,13 @@ void Kernel::vector_select(char effect) {
 		std::cout << "\nGaussian Blur\n";
 
 	}
-
-	else if (effect == 'i') {
+	else if (effect == 'i') {								//UNSHARP MASKING	
 		std::vector<int> vec =
 								{ 1, 4, 6, 4, 1,
 								  4, 16, 24, 16, 4,
 								  6, 24, -476, 24, 6,
 								  4, 16, 24, 16, 4,
-								  1, 4, 6, 4, 1 }; // UNSHARP MASKING
+								  1, 4, 6, 4, 1 }; 
 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
@@ -79,13 +76,12 @@ void Kernel::vector_select(char effect) {
 		std::cout << "\nUnsharp Masking\n";
 
 	}
-
-	else if (effect == 'j') {
+	else if (effect == 'j') {								// Blur (Low)
 
 		std::vector<int> vec = 
 								{ 1, 1, 1, 
 								  1, 1, 1, 
-								  1, 1, 1 }; // Blur (Low)
+								  1, 1, 1 }; 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -93,13 +89,12 @@ void Kernel::vector_select(char effect) {
 		norm = 9;
 		std::cout << "\nBlur (Low)\n";
 	}
-
-	else if (effect == 'k') {
+	else if (effect == 'k') {								// Blur (High)
 		std::vector<int> vec = { 5,5,5,5,5,
 								 5,5,5,5,5,
 								 5,5,5,5,5,
 								 5,5,5,5,5,
-								 5,5,5,5,5 }; // Blur (High)
+								 5,5,5,5,5 }; 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -108,12 +103,11 @@ void Kernel::vector_select(char effect) {
 		std::cout << "\nBlur High\n";
 
 	}
-
-	else if (effect == 'l') {
+	else if (effect == 'l') {								//Edge Detection
 		std::vector<int> vec = 
 								{ -1, -1, -1, 
 								  -1, 8, -1, 
-								  -1, -1, -1 }; // Edge Detection
+								  -1, -1, -1 };
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -122,14 +116,13 @@ void Kernel::vector_select(char effect) {
 		std::cout << "\nEdge Detection\n";
 
 	}
-
-	else if (effect == 'm') {
+	else if (effect == 'm') {								//Psychadeli
 		std::vector<int> vec =
 								{ 5, 10, 20, 10, 5,
 								 10, 100, 200, 200, 10,
 							     20, 200, -1500, 200, 20,
 								 10, 100, 200, 100, 10,
-								  5, 10, 20, 10, 5 }; // Psychadelic
+								  5, 10, 20, 10, 5 }; 
 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
@@ -137,16 +130,14 @@ void Kernel::vector_select(char effect) {
 		kernel_dim = 5;
 		norm = 1;
 	}
-
-	
-
-	else {
-		std::vector<int> vec = { 0, 0, 0 , 0, 1, 0, 0, 0, 0 }; // Same
+	else {													//Identity
+		std::vector<int> vec = { 0, 0, 0 , 0, 1, 0, 0, 0, 0 }; 
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
 		kernel_dim = 3;
 		norm = 1;
+		std::cout << "\nThe identity\n";
 	}
 }
 
@@ -159,6 +150,7 @@ void Kernel::place(){
 	int i = 0;
 	int j = 1;
 
+	//Loads the array into an vector of vectors 
 	while (i < (kernel_dim * kernel_dim)) {
 		row.push_back(conv_vec[i]);
 
