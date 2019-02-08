@@ -24,6 +24,7 @@ void Kernel::vector_select(char effect) {
 		}
 		kernel_dim = 3;
 		norm = 9;
+		std::cout << "\nBlur\n";
 	}
 
 	else if (effect == 'S') {
@@ -33,6 +34,7 @@ void Kernel::vector_select(char effect) {
 		}
 		kernel_dim = 3; 
 		norm = 1;
+		std::cout << "\nSharpen\n";
 	}
 
 	else if (effect == 'E') {
@@ -42,6 +44,7 @@ void Kernel::vector_select(char effect) {
 		}
 		kernel_dim = 3; 
 		norm = 1;
+		std::cout << "\nEdge\n";
 	}
 
 	else if (effect == 'P') {

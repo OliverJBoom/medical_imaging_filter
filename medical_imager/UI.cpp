@@ -1,9 +1,15 @@
 #include <iostream>
 #include <string>
 #include "UI.h"
+#include "Filter.h"
+#include "Convolution.h"
+
 #include <filesystem>
+#include <chrono>
+#include <thread>
 
 namespace fs = std::filesystem;
+
 
 void user::welcome() {
 	/*
@@ -15,12 +21,13 @@ void user::welcome() {
 	std::cout << dir;
 	*/
 
-	std::cout << "Welcome to Apollo Medical Imagine Corporation" << std::endl;
-	std::cout << std::endl << "World leaders in medical imaging technology" << std::endl;
+	std::cout << "Welcome to Apollo Medical Imagine Corporation\n" << std::endl;
+	std::cout << std::endl << "World leaders in medical imaging technology\n" << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-	std::cout << "These are the names of your files:" << std::endl;
+	std::cout << "These are the names of your files:\n" << std::endl;
 	std::string path = "\Images";
-	
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	for (const auto & entry : fs::directory_iterator(path)){
 		std::string f;
 		f = entry.path().string();
@@ -39,7 +46,8 @@ void user::welcome() {
 
 void user::name_input(){
 	std::cout << std::endl;
-	std::cout << "Please type the name of your file into the terminal including its extention" << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	std::cout << "Please type the name of your file into the terminal including its extention\n" << std::endl;
 	std::cin >> file_name;
 	this->valid_file();
 }
@@ -73,7 +81,8 @@ void user::valid_file() {
 
 
 void user::filter_select() {
-	std::cout << std::endl << "Perfect! Time to select your filter." << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	std::cout << std::endl << "\nPerfect! Time to select your filter." << std::endl;
 	std::cout << "Your options are:" << std::endl;
 
 	std::cout << "Greyscale:        Code 'a'" << std::endl;
@@ -91,13 +100,53 @@ void user::filter_select() {
 	std::cout << "Edge detection:   Code 'l'" << std::endl;
 	std::cout << "Psychadelic:      Code 'm' \t" << std::endl;
 
-
-	std::cout << "Failure to enter a correct code will result in your original image being return unfiltered." << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	std::cout << "\nFailure to enter a correct code will result in your original image being return unfiltered." << std::endl;
 	std::cout << "And you wouldnt want that would you!" << std::endl;
 
 	std::cout << "So what'll it be?" << std::endl;
 
 	std::cin >> effect;
-
 }
 
+
+
+CImg<unsigned char> user::wrapper_function(CImg<unsigned char> src, Filter Fil, Kernel convolve){
+	CImg<unsigned char> out;
+	int level;
+
+	if (effect == 'a') {				 //Greyccale
+		out = Fil.greyscale(src);
+	}
+	else if (effect == 'b') {			 //Brighten
+		std::cout << "What level brightening would you like to input (between 0-256)\n";
+		std::cin >> level;
+		out = Fil.brighten(src, level);
+	}
+	else if (effect == 'c') {			 //Low pass filter
+		std::cout << "Below what level brightness would you like to pass (between 0-256)\n";
+		std::cin >> level;
+		out = Fil.low_pass(src, level);
+	}
+	else if (effect == 'd') {			 //High pass filter
+		std::cout << "Over what level brightness would you like to pass (between 0-256)\n";
+		std::cin >> level;
+		out = Fil.high_pass(src, level);
+	}
+	else if (effect == 'e') {			 //Band pass filter
+		std::cout << "Between what level brightnesses would you like to pass (between 0-256)\n";
+		int low_lim;
+		int up_lim;
+		std::cin >> low_lim;
+		std::cin >> up_lim;
+		out = Fil.band_pass(src, low_lim, up_lim);
+	}
+	else {								 //All convolve effects	
+		std::cout << "Running convolution\n";
+		convolve.set_dim(Fil.width, Fil.height, Fil.depth);
+		convolve.vector_select(effect);
+		convolve.place();
+		out = convolve.conv(src);
+	}
+return out;
+}
