@@ -181,12 +181,11 @@ void Kernel::set_norm(int value) {
 //Performs convolution on an image using an input kernel
 CImg<unsigned char> Kernel::conv(CImg<unsigned char> src) {
 	int padding = (kernel_dim - 1) / 2;
+	int channels = src.spectrum();
 
-	CImg<unsigned char> im_out(width - (2 * padding), height - (2 * padding), depth, 3);
+	CImg<unsigned char> im_out(width - (2 * padding), height - (2 * padding), depth, channels);
 
-	for (int c = 0; c < 3; c++) {
-		 std::cout << "c" << c << std::endl;
-		cimg_forXY(src, x, y) {
+	cimg_forXYC(src, x, y, c) {
 			if ((x >= padding) && (x < width - padding) && (y >= padding) && (y < height - padding)) {
 
 				int upp_x = x + padding;
@@ -217,6 +216,6 @@ CImg<unsigned char> Kernel::conv(CImg<unsigned char> src) {
 				}
 			}
 		}
-	}
+
 	return im_out;
 }

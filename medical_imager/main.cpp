@@ -39,16 +39,17 @@ int main() {
 	CImg<unsigned char> green = Fil.getGreen(src);
 
 	CImg<unsigned char> grey = Fil.greyscale(src);
-	CImg<unsigned char> bri = Fil.brighten(grey, 60);
-	CImg<unsigned char> high_pass = Fil.low_pass(grey, 90);
-	CImg<unsigned char> low_pass = Fil.high_pass(grey, 60);
-	//CImg<unsigned char> conv_out = Example.conv(src);
+	CImg<unsigned char> bri = Fil.brighten(src, 100);
+	CImg<unsigned char> high_pass = Fil.low_pass(src, 90);
+	CImg<unsigned char> low_pass = Fil.high_pass(src, 60);
+	CImg<unsigned char> conv_out = Example.conv(src);
 
-	class display Grid;
-	Grid.before_after(src,  blue);
-	Grid.warhol(src, red, green, blue);
+	//class display Grid;
+	//Grid.before_after(src,  blue);
+	//Grid.warhol(src, red, green, blue);
 
-	
+	high_pass.display();
+
 	system("pause");
 	return 0;
 }
