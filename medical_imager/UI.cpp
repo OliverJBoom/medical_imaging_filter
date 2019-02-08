@@ -111,14 +111,45 @@ void user::filter_select() {
 
 
 
+CImg<unsigned char> user::extra_filter(CImg<unsigned char> src, CImg<unsigned char> out, Filter Fil, Kernel convolve) {
+	if (decision == 'y') {
+		std::cout << "What other filter would you like? \nCode:";
+		std::cin >> effect;
+		if (effect == 'a') {
+			std::cout << "\nEnter a new filter!";
+			extra_filter(src, out, Fil, convolve);
+		}
+		return out;
+	}
+	else if (decision == 'n') {
+		return out;
+	}
+	else {
+		std::cout << "\nI'm sorry but you haven't entered a valid y/n option, please try again.\n";
+		std::cin >> decision;
+		extra_filter(src, out, Fil, convolve);
+		return out;
+	}
+}
+
+
+
 CImg<unsigned char> user::wrapper_function(CImg<unsigned char> src, Filter Fil, Kernel convolve){
+
 	CImg<unsigned char> out;
 	int level;
 
-	if (effect == 'a') {				 //Greyccale
+	if (effect == 'a') {				 //GreyScale
 		out = Fil.greyscale(src);
+		std::cout << "\nWould you also like to apply further filters (y/n)?\n";
+		std::cin >> decision;
+		extra_filter(src, out, Fil, convolve);
+		if (decision == 'n'){
+			return out;
+		}
 	}
-	else if (effect == 'b') {			 //Brighten
+
+	if (effect == 'b') {				 //Brighten
 		std::cout << "What level brightening would you like to input (between 0-256)\n";
 		std::cin >> level;
 		out = Fil.brighten(src, level);

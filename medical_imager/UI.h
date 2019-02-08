@@ -14,6 +14,8 @@ class user {
 
 		std::string file_name;
 		char effect;
+		char decision;
+
 		CImg<unsigned char> wrapper_function(CImg<unsigned char> src, Filter Fil, Kernel convolve);
 
 		void welcome();
@@ -21,7 +23,7 @@ class user {
 		void valid_file();
 		bool in_dir = false;
 		void filter_select();
-
+		CImg<unsigned char> extra_filter(CImg<unsigned char> src, CImg<unsigned char> , Filter Fil, Kernel convolve);
 };
 
 #endif

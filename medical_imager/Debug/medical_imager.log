@@ -1,6 +1,4 @@
-﻿  main.cpp
-  UI.cpp
+﻿  UI.cpp
 c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\ui.cpp(29): warning C4129: 'I': unrecognized character escape sequence
 c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\ui.cpp(62): warning C4129: 'I': unrecognized character escape sequence
-  Generating Code...
   medical_imager.vcxproj -> C:\Users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\Debug\medical_imager.exe

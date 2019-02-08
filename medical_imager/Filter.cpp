@@ -15,7 +15,7 @@ using namespace cimg_library;
 CImg<unsigned char> Filter::greyscale(CImg<unsigned char> src) {
 
 	CImg<unsigned char> grey(src.width(), src.height(), src.depth(), 1);
-
+	
 	cimg_forXY(src, x, y) { 
 	// Recipe for grayscale weighting from RGB : 0.2989, 0.5870, 0.1140
 	// Need to deal with the rounding errors

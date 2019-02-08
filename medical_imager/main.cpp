@@ -21,8 +21,7 @@ int main() {
 	ui.welcome();
 	ui.name_input();
 	ui.filter_select();
-	CImg<unsigned char> src_2 (ui.file_name.c_str());
-	CImg<unsigned char> src = Fil.greyscale(src_2);
+	CImg<unsigned char> src (ui.file_name.c_str());
 
 	Fil.set_dim(src.width(), src.height(), src.depth());
 	CImg<unsigned char> out;
@@ -32,7 +31,7 @@ int main() {
 	out = ui.wrapper_function(src, Fil, convolve);
 	out.display();
 
-	std::cout << "\n\nThank you for your custom!";
+	std::cout << "\nThank you for your custom!\n\n";
 
 	system("pause");
 	return 0;
