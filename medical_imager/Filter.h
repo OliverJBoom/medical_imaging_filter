@@ -14,6 +14,11 @@ using namespace cimg_library;
 class Filter
 {
 	public:
+		//Class Attributes
+		int width;
+		int height;
+		int depth;
+
 		//Class methods
 		CImg<unsigned char> greyscale(CImg<unsigned char> src);
 		CImg<unsigned char> colour_swap(CImg<unsigned char> src);
@@ -26,13 +31,6 @@ class Filter
 		CImg<unsigned char> getBlue(CImg<unsigned char> src);
 
 		void set_dim(int width, int height, int depth);
-
-	protected:
-
-		//Class Attributes
-		int width;
-		int height;
-		int depth;
 };
 
 

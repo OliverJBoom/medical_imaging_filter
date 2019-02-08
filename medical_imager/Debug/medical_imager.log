@@ -1,3 +1,16 @@
-﻿  Filter.cpp
+﻿  convolution.cpp
+c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\convolution.cpp(172): warning C4018: '<': signed/unsigned mismatch
+c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\convolution.cpp(174): warning C4018: '<': signed/unsigned mismatch
+c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\convolution.cpp(226): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=unsigned char
+          ]
+  Filter.cpp
 c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\filter.cpp(19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  main.cpp
+  UI.cpp
+c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\ui.cpp(24): warning C4129: 'I': unrecognized character escape sequence
+c:\users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\medical_imager\ui.cpp(59): warning C4129: 'I': unrecognized character escape sequence
+  Generating Code...
   medical_imager.vcxproj -> C:\Users\acse5-user\source\repos\acse-5-advanced-programming-coursework-2-big-pharma\Debug\medical_imager.exe
