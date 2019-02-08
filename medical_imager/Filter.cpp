@@ -25,9 +25,45 @@ CImg<unsigned char> Filter::greyscale(CImg<unsigned char> src) {
 	return grey;
 }
 
+// Get Red
+CImg<unsigned char> Filter::getRed(CImg<unsigned char> src) {
+
+	CImg<unsigned char> Red(src.width(), src.height(), src.depth(), 3);
+	Red.CMYtoRGB();
+
+	cimg_forXY(src, x, y) {
+		Red(x, y, 0) = (int)src(x, y, 0, 0);
+	};
+	return Red;
+}
+
+// Get Green
+CImg<unsigned char> Filter::getGreen(CImg<unsigned char> src) {
+
+	CImg<unsigned char> Green(src.width(), src.height(), src.depth(), 3);
+	Green.CMYtoRGB();
+
+	cimg_forXY(src, x, y) {
+		Green(x, y, 1) = (int)src(x, y, 0, 1);
+	};
+	return Green;
+}
+
+// Get Blue
+CImg<unsigned char> Filter::getBlue(CImg<unsigned char> src) {
+
+	CImg<unsigned char> Blue(src.width(), src.height(), src.depth(), 3);
+	Blue.CMYtoRGB();
+
+	cimg_forXY(src, x, y) {
+		Blue(x, y, 2) = (int)src(x, y, 0, 2);
+	};
+	return Blue;
+}
 
 
-//Greyscales the image
+
+//Swap RGB colours
 CImg<unsigned char> Filter::colour_swap(CImg<unsigned char> src) {
 
 	CImg<unsigned char> col(width, height, depth, 3);
@@ -40,6 +76,7 @@ CImg<unsigned char> Filter::colour_swap(CImg<unsigned char> src) {
 		case 0:
 			col(x, y, 0, 2) = val;
 			break;
+			
 		case 1:
 			col(x, y, 0, 0) = val;
 			break;

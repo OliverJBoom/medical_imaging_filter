@@ -1,4 +1,4 @@
-#include <cstddef> 
+  #include <cstddef> 
 #include <iostream>
 #include <array>
 #include <vector>
@@ -25,6 +25,20 @@ void Kernel::vector_select(char effect) {
 		kernel_dim = 3;
 		norm = 9;
 	}
+
+	else if (effect == 'A') {
+		std::vector<int> vec = { 5,5,5,5,5,
+								 5,5,5,5,5,
+								 5,5,5,5,5,
+								 5,5,5,5,5,
+								 5,5,5,5,5}; // Blur
+		for (auto &i : vec) {
+			conv_vec.push_back(i);
+		}
+		kernel_dim = 5;
+		norm = 125;
+	}
+
 
 	else if (effect == 'S') {
 		std::vector<int> vec = { 0, -1, 0, -1, 5, -1, 0, -1, 0 }; // Sharpen
@@ -59,8 +73,56 @@ void Kernel::vector_select(char effect) {
 		norm = 1;
 	}
 
+	else if (effect == 'Q') {
+		std::vector<int> vec =
+		{1, 4, 6, 4, 1,
+		4, 16, 24, 16, 4,
+		6, 24, -476, 24, 6,
+		4, 16, 24, 16, 4,
+		1, 4, 6, 4, 1 }; // UNSHARP MASKING
+
+		for (auto &i : vec) {
+			conv_vec.push_back(i);
+		}
+		kernel_dim = 5;
+		norm = -256;
+	}
+
+	else if (effect == 'G') {
+		std::vector<int> vec =
+		{ 1, 4, 6, 4, 1,
+		4, 16, 24, 16, 4,
+		6, 24, 36, 24, 6,
+		4, 16, 24, 16, 4,
+		1, 4, 6, 4, 1 }; // Gaussian Blur
+
+		for (auto &i : vec) {
+			conv_vec.push_back(i);
+		}
+		kernel_dim = 5;
+		norm = 256;
+	}
+
+	else if (effect == 'S') {
+		std::vector<int> vec =
+		{ -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1,
+		-1, -1, 25, -1, -1,
+		-1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1 }; // Sharpening 5x5
+
+		for (auto &i : vec) {
+			conv_vec.push_back(i);
+		}
+		kernel_dim = 5;
+		norm = 1;
+	}
+
+
 	else {
-		std::vector<int> vec = { 0, 0, 0 , 0, 1, 0, 0, 0, 0 }; // Same
+		std::vector<int> vec = {0, 0, 0, 
+			                    0, 1, 0, 
+			                    0, 0, 0 }; // Identity
 		for (auto &i : vec) {
 			conv_vec.push_back(i);
 		}
@@ -120,37 +182,39 @@ void Kernel::set_norm(int value) {
 CImg<unsigned char> Kernel::conv(CImg<unsigned char> src) {
 	int padding = (kernel_dim - 1) / 2;
 
-	CImg<unsigned char> im_out(width - (2 * padding), height - (2 * padding), depth, 1);
+	CImg<unsigned char> im_out(width - (2 * padding), height - (2 * padding), depth, 3);
 
+	for (int c = 0; c < 3; c++) {
+		 std::cout << "c" << c << std::endl;
+		cimg_forXY(src, x, y) {
+			if ((x >= padding) && (x < width - padding) && (y >= padding) && (y < height - padding)) {
 
-	cimg_forXY(src, x, y) {
-		if ((x >= padding) && (x < width - padding) && (y >= padding) && (y < height - padding)) {
+				int upp_x = x + padding;
+				int low_x = x - padding;
 
-			int upp_x = x + padding;
-			int low_x = x - padding;
+				int upp_y = y + padding;
+				int low_y = y - padding;
 
-			int upp_y = y + padding;
-			int low_y = y - padding;
+				double accum = 0;
+				int count = 0;
 
-			double accum = 0;
-			int count = 0;
-
-			for (int i = low_x; i < upp_x + 1; i++) {
-				for (int j = low_y; j < upp_y + 1; j++) {
-					accum = accum + (int)src(i, j) * kernel_array[i - low_x][j - low_y];
+				for (int i = low_x; i < upp_x + 1; i++) {
+					for (int j = low_y; j < upp_y + 1; j++) {
+						accum = accum + (int)src(i, j, 0, c) * kernel_array[i - low_x][j - low_y];
+					}
 				}
-			}
 
-			accum = accum / norm;
-			
-			if (accum > 255) {
-				im_out(x - padding, y - padding) = 255;
-			}
-			else if (accum < 0){
-				im_out(x - padding, y - padding) = 0;
-			}
-			else {
-				im_out(x - padding, y - padding) = accum;
+				accum = accum / norm;
+
+				if (accum > 255) {
+					im_out(x - padding, y - padding, 0, c) = 255;
+				}
+				else if (accum < 0) {
+					im_out(x - padding, y - padding, 0, c) = 0;
+				}
+				else {
+					im_out(x - padding, y - padding, 0, c) = accum;
+				}
 			}
 		}
 	}
