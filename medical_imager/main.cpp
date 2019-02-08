@@ -6,7 +6,7 @@
 #include "Convolution.h"
 #include "Filter.h"
 #include "UI.h"
-
+#include "display.h"
 #include "CImg.h"
 
 
@@ -29,7 +29,9 @@ int main() {
 	class Kernel convolve;
 
 	out = ui.wrapper_function(src, Fil, convolve);
-	out.display();
+
+	class display Grid;
+	Grid.before_after(src, out);
 
 	std::cout << "\nThank you for your custom!\n\n";
 

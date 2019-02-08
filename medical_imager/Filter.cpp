@@ -15,19 +15,55 @@ using namespace cimg_library;
 CImg<unsigned char> Filter::greyscale(CImg<unsigned char> src) {
 
 	CImg<unsigned char> grey(src.width(), src.height(), src.depth(), 1);
-	
-	cimg_forXY(src, x, y) { 
-	// Recipe for grayscale weighting from RGB : 0.2989, 0.5870, 0.1140
-	// Need to deal with the rounding errors
-	int val = 0.2989 * (int)src(x, y, 0) + 0.5870 * (int)src(x, y, 1) + 0.1140 * (int)src(x, y, 2);
-	grey(x, y, 0, 0) = val;
+
+	cimg_forXY(src, x, y) {
+		// Recipe for grayscale weighting from RGB : 0.2989, 0.5870, 0.1140
+		// Need to deal with the rounding errors
+		int val = 0.2989 * (int)src(x, y, 0) + 0.5870 * (int)src(x, y, 1) + 0.1140 * (int)src(x, y, 2);
+		grey(x, y, 0, 0) = val;
 	}
 	return grey;
 }
 
+// Get Red
+CImg<unsigned char> Filter::getRed(CImg<unsigned char> src) {
+
+	CImg<unsigned char> Red(src.width(), src.height(), src.depth(), 3);
+	Red.CMYtoRGB();
+
+	cimg_forXY(src, x, y) {
+		Red(x, y, 0) = (int)src(x, y, 0, 0);
+	};
+	return Red;
+}
+
+// Get Green
+CImg<unsigned char> Filter::getGreen(CImg<unsigned char> src) {
+
+	CImg<unsigned char> Green(src.width(), src.height(), src.depth(), 3);
+	Green.CMYtoRGB();
+
+	cimg_forXY(src, x, y) {
+		Green(x, y, 1) = (int)src(x, y, 0, 1);
+	};
+	return Green;
+}
+
+// Get Blue
+CImg<unsigned char> Filter::getBlue(CImg<unsigned char> src) {
+
+	CImg<unsigned char> Blue(src.width(), src.height(), src.depth(), 3);
+	Blue.CMYtoRGB();
+
+	cimg_forXY(src, x, y) {
+		Blue(x, y, 2) = (int)src(x, y, 0, 2);
+	};
+	return Blue;
+}
 
 
-//Greyscales the image
+
+//Swap RGB colours
 CImg<unsigned char> Filter::colour_swap(CImg<unsigned char> src) {
 
 	CImg<unsigned char> col(width, height, depth, 3);
@@ -40,6 +76,7 @@ CImg<unsigned char> Filter::colour_swap(CImg<unsigned char> src) {
 		case 0:
 			col(x, y, 0, 2) = val;
 			break;
+
 		case 1:
 			col(x, y, 0, 0) = val;
 			break;
@@ -64,18 +101,20 @@ void Filter::set_dim(int im_width, int im_height, int im_depth) {
 
 // Brightens the image by an input value. 
 CImg<unsigned char> Filter::brighten(CImg<unsigned char> src, int level) {
+	int channels = src.spectrum();
+	std::cout << "channels: " << channels;
 
-	CImg<unsigned char> bright(width, height, depth, 1);
+	CImg<unsigned char> bright(width, height, depth, channels);
 
-	cimg_forXY(src, x, y) {
+	cimg_forXYC(src, x, y, c) {
 		// Recipe for grayscale weighting from RGB : 0.2989, 0.5870, 0.1140
-		int val = (int)src(x, y);
-	
-		if (val < 255 - level){
-		bright(x, y) = val + level;
+		int val = (int)src(x, y, c);
+
+		if (val < 255 - level) {
+			bright(x, y, 0, c) = val + level;
 		}
 		else {
-			bright(x, y) = 255;
+			bright(x, y, 0, c) = 255;
 		}
 	}
 	return bright;
@@ -85,17 +124,19 @@ CImg<unsigned char> Filter::brighten(CImg<unsigned char> src, int level) {
 
 // Brightens the image by an input value. 
 CImg<unsigned char> Filter::high_pass(CImg<unsigned char> src, int level) {
+	int channels = src.spectrum();
+	std::cout << "channels: " << channels;
 
-	CImg<unsigned char> pass(width, height, depth, 1);
+	CImg<unsigned char> pass(width, height, depth, channels);
 
-	cimg_forXY(src, x, y) {
-		int val = (int)src(x, y);
+	cimg_forXYC(src, x, y, c) {
+		int val = (int)src(x, y, c);
 
 		if (val < level) {
-			pass(x, y) = val;
+			pass(x, y, 0, c) = val;
 		}
 		else {
-			pass(x, y) = 0;
+			pass(x, y, 0, c) = 0;
 		}
 	}
 	return pass;
@@ -104,17 +145,19 @@ CImg<unsigned char> Filter::high_pass(CImg<unsigned char> src, int level) {
 
 
 CImg<unsigned char> Filter::low_pass(CImg<unsigned char> src, int level) {
+	int channels = src.spectrum();
+	std::cout << "channels: " << channels;
 
-	CImg<unsigned char> pass(width, height, depth, 1);
+	CImg<unsigned char> pass(width, height, depth, channels);
 
-	cimg_forXY(src, x, y) {
-		int val = (int)src(x, y);
+	cimg_forXYC(src, x, y, c) {
+		int val = (int)src(x, y, c);
 
 		if (val > level) {
-			pass(x, y) = val;
+			pass(x, y, 0, c) = val;
 		}
 		else {
-			pass(x, y) = 0;
+			pass(x, y, 0, c) = 0;
 		}
 	}
 	return pass;
@@ -123,17 +166,19 @@ CImg<unsigned char> Filter::low_pass(CImg<unsigned char> src, int level) {
 
 
 CImg<unsigned char> Filter::band_pass(CImg<unsigned char> src, int low_lim, int up_lim) {
+	int channels = src.spectrum();
+	std::cout << "channels: " << channels;
 
-	CImg<unsigned char> pass(width, height, depth, 1);
+	CImg<unsigned char> pass(width, height, depth, channels);
 
-	cimg_forXY(src, x, y) {
-		int val = (int)src(x, y);
+	cimg_forXYC(src, x, y, c) {
+		int val = (int)src(x, y, c);
 
 		if ((val > low_lim) && (val < up_lim)) {
-			pass(x, y) = val;
+			pass(x, y, 0, c) = val;
 		}
 		else {
-			pass(x, y) = 0;
+			pass(x, y, 0, c) = 0;
 		}
 	}
 	return pass;

@@ -83,7 +83,7 @@ void user::valid_file() {
 void user::filter_select() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	std::cout << std::endl << "\nPerfect! Time to select your filter." << std::endl;
-	std::cout << "Your options are:" << std::endl;
+	std::cout << "Your options are:\n" << std::endl;
 
 	std::cout << "Greyscale:        Code 'a'" << std::endl;
 	std::cout << "Brighten:         Code 'b'" << std::endl;
@@ -96,9 +96,11 @@ void user::filter_select() {
 	std::cout << "Gaussian blur :   Code 'h'" << std::endl;
 	std::cout << "Unsharp masking:  Code 'i'" << std::endl;
 	std::cout << "Blur (Low):       Code 'j'" << std::endl;
-	std::cout << "Blue (High):      Code 'k'" << std::endl;
+	std::cout << "Blur (High):      Code 'k'" << std::endl;
 	std::cout << "Edge detection:   Code 'l'" << std::endl;
-	std::cout << "Psychadelic:      Code 'm' \t" << std::endl;
+	std::cout << "Psychadelic:      Code 'm'" << std::endl;
+	std::cout << "Colour Swap:      Code 'n'" << std::endl;
+
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	std::cout << "\nFailure to enter a correct code will result in your original image being return unfiltered." << std::endl;
@@ -139,7 +141,9 @@ CImg<unsigned char> user::wrapper_function(CImg<unsigned char> src, Filter Fil, 
 	CImg<unsigned char> out;
 	int level;
 
-	if (effect == 'a') {				 //GreyScale
+	if (effect == 'a') {				 //Greyscale
+		std::cout << "\nEffect: Greyscale";
+
 		out = Fil.greyscale(src);
 		std::cout << "\nWould you also like to apply further filters (y/n)?\n";
 		std::cin >> decision;
@@ -155,22 +159,32 @@ CImg<unsigned char> user::wrapper_function(CImg<unsigned char> src, Filter Fil, 
 		out = Fil.brighten(src, level);
 	}
 	else if (effect == 'c') {			 //Low pass filter
+		std::cout << "\nEffect: Low pass filter";
+
 		std::cout << "Below what level brightness would you like to pass (between 0-256)\n";
 		std::cin >> level;
 		out = Fil.low_pass(src, level);
 	}
 	else if (effect == 'd') {			 //High pass filter
+		std::cout << "\nEffect: High pass filter";
+
 		std::cout << "Over what level brightness would you like to pass (between 0-256)\n";
 		std::cin >> level;
 		out = Fil.high_pass(src, level);
 	}
 	else if (effect == 'e') {			 //Band pass filter
+		std::cout << "\nEffect: Band pass filter";
+
 		std::cout << "Between what level brightnesses would you like to pass (between 0-256)\n";
 		int low_lim;
 		int up_lim;
 		std::cin >> low_lim;
 		std::cin >> up_lim;
 		out = Fil.band_pass(src, low_lim, up_lim);
+	}
+	else if (effect == 'n') {			 //Band pass filter
+		std::cout << "\nEffect: Colour Swap";
+		out = Fil.colour_swap(src);
 	}
 	else {								 //All convolve effects	
 		std::cout << "Running convolution\n";
