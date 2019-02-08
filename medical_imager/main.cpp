@@ -6,6 +6,8 @@
 #include "Convolution.h"
 #include "Filter.h"
 #include "UI.h"
+#include "display.h"
+
 
 #include "CImg.h"
 
@@ -15,12 +17,13 @@ using namespace cimg_library;
 
 
 int main() {
-	//cimg::imagemagick_path("C://Program Files//ImageMagick-7.0.8-Q16//convert.exe");
+	cimg::imagemagick_path("C://Program Files//ImageMagick-7.0.8-Q16//magick.exe");
 	class Filter Fil;
-	welcome();
-	CImg<unsigned char> src("Images//chestb.bmp");
+	//welcome();
+	CImg<unsigned char> src("Images//ACSE.bmp");
+	//src.display();
 
-	/*
+	
 	Fil.set_dim(src.width(), src.height(), src.depth());
 
 	class Kernel Example;
@@ -31,19 +34,21 @@ int main() {
 	Example.set_dim(Fil.width, Fil.height, Fil.depth);
 
 	CImg<unsigned char> col = Fil.colour_swap(src);
+	CImg<unsigned char> red = Fil.getRed(src);
+	CImg<unsigned char> blue = Fil.getBlue(src);
+	CImg<unsigned char> green = Fil.getGreen(src);
+
 	CImg<unsigned char> grey = Fil.greyscale(src);
 	CImg<unsigned char> bri = Fil.brighten(grey, 60);
 	CImg<unsigned char> high_pass = Fil.low_pass(grey, 90);
 	CImg<unsigned char> low_pass = Fil.high_pass(grey, 60);
-	CImg<unsigned char> conv_out = Example.conv(grey);
+	//CImg<unsigned char> conv_out = Example.conv(src);
 
-	//col.display();
-	//high_pass.display();
-	//low_pass.display();
-	//grey.display();
-	//bri.display();
-	conv_out.display();
-	*/
+	class display Grid;
+	Grid.before_after(src,  blue);
+	Grid.warhol(src, red, green, blue);
+
+	
 	system("pause");
 	return 0;
 }
