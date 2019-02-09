@@ -6,14 +6,14 @@
 //Diplays both the filtered and unfiltered image together
 void display::before_after(CImg<unsigned char> original, CImg<unsigned char> filtered)
 {
-	original.display();
-	filtered.display();	
-	CImg<unsigned char> row;
-	const char *const a = "text";
-	int x_original = original.width();
-	int x_filtered = filtered.width();
-	row = original.append(filtered, 'x');
-	row.display();
+	cimg_library::CImgDisplay before(original, "Before");
+	cimg_library::CImgDisplay after(filtered, "After");
+
+	while (!before.is_closed())
+		before.wait();
+
+	while (!after.is_closed())
+		after.wait();
 }
 
 
